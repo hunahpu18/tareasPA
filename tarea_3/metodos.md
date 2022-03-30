@@ -1,13 +1,13 @@
 # Tarea 3
-Jesus Ivan Rivera Ramirez
------
+> Jesus Ivan Rivera Ramirez 
+
 Descripción de los metodos mostrados al ejecutar lo siguiente en python
 ```python
->>>aux = [1, 2, 3]
+>>> aux = [1, 2, 3]
 >>> help(type(aux))
 ```
 
-### \_\_add\_\_
+## \_\_add\_\_
 
 ```python
 __add__
@@ -15,7 +15,8 @@ __add__
 ```
 Permite concatenar una lista al final de otra lista, y devuelve la concatenación 
 de las listas, su funcionamiento es igual a el operador `+`.
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [1,2,3]
 >>> aux2 = aux.add([4]) # aux2 = aux+[4] 
@@ -23,7 +24,7 @@ de las listas, su funcionamiento es igual a el operador `+`.
 [1, 2, 3, 4]
 ```
 
-### \_\_contains\_\_
+## \_\_contains\_\_
 
 ```python
 __contains__(self, key, /)
@@ -32,21 +33,23 @@ __contains__(self, key, /)
 
 Indica si un elemento es *key* esta contenido en una lista,
 su funcionamiento es igual a `in`.
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [1, 2, 3]
 >>> aux.__contains__(2) # 2 in aux
 True
 ```
 
-### \_\_delitem\_\_
+## \_\_delitem\_\_
 
 ```python
 __delitem__(self, key, /)
     Delete self[key].
 ```
 Elimina el elemento de la lista con indice *key*, funciona similiar a `del aux[key]`.
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [1, 2, 3]
 >>> aux.__delitem__(2) # del aux[2]
@@ -54,15 +57,16 @@ Elimina el elemento de la lista con indice *key*, funciona similiar a `del aux[k
 [1, 2]
 ```
 
-### \_\_eq\_\_
+## \_\_eq\_\_
 
 ```python
 __eq__(self, value, /)
     Return self==value.
 ```
 Indica si un dos listas son iguales, es decir, tienen los mismos elementos,
-en cada indice. Funciona similar a `lista1 == lista2'.
-#### Ejemplo
+en cada indice. Funciona similar a `lista1 == lista2`.
+
+**Ejemplo**
 ```python
 >>> aux = [1, 2, [3]]
 >>> aux2 = [1, 2, 3]
@@ -70,7 +74,7 @@ en cada indice. Funciona similar a `lista1 == lista2'.
 False
 ```
 
-### \_\_ge\_\_
+## \_\_ge\_\_
 
 ```python
 __ge__(self, value, /)
@@ -78,7 +82,8 @@ __ge__(self, value, /)
 ```
 Nos permite comparar cuando una lista es **mayor** o igual a otra, la comparación se hace usando el orden lexicográfico 
 su funcionamiento es similar a `lista1 >= lista2`.
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [1, 2, 3]
 >>> aux2 = [1, 1, 2]
@@ -89,7 +94,7 @@ False
  
 ```
 
-### \_\_getattribute\_\_
+## \_\_getattribute\_\_
 
 ```python
 __getattribute__(self, name, /)
@@ -99,34 +104,36 @@ __getattribute__(self, name, /)
 Nos permite obtener el valor de un atributo con nombre *name*,
 funciona como 'lista.name'.
 
-#### Ejemplo
+**Ejemplo**
 ```python
 >>> aux = [1, 2, 3]
 >>> aux.__getattribute__('append') # aux.append
 <built-in method append of list object at 0x7f25d4d14240>
 ```
 
-### \_\_getitem\_\_
+## \_\_getitem\_\_
 ```python
 __getitem__(...)
     x.__getitem__(y) <==> x[y]
 ```
 Permite obtener el elemento con indice *y*, funciona igual que `lista[y]`.
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [1, 2, 3, 4]
 >>> aux.__getitem__(2) # aux[2]
 3
 ```
 
-### \_\_gt\_\_
+## \_\_gt\_\_
 ```python
 __gt__(self, value, /)
     Return self>value.
 ```
 Nos permite comparar cuando una lista es **mayor** a otra usando el orden
 lexicográfico, funciona igual que `lista1 > lista2`.
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [1, 2, 3]                                                               
 >>> aux2 = [1, 1, 2]
@@ -139,14 +146,15 @@ False
 
 ```
 
-### \_\_iadd\_\_
+## \_\_iadd\_\_
 ```python
 __iadd__(self, value, /)
     Implement self+=value.
 ```
 Implementa la funcionalidad `+=`, es decir concatena la lista *value* y asigna el
 valor a nuestra lista.
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [1, 2, 3]
 >>> aux.__iadd__([4, 5, 6]) # aux += [4, 5, 6] o aux = aux + [4, 5, 6]
@@ -154,7 +162,7 @@ valor a nuestra lista.
 [1, 2, 3, 4, 5, 6]
 ```
 
-### \_\_imul\_\_
+## \_\_imul\_\_
 ```python
 __imul__(self, value, /)
     Implement self*=value.
@@ -162,7 +170,8 @@ __imul__(self, value, /)
 
 Implementa la funcionalidad `*=` , es decir, repite *value*-veces la lista y la
 asigna a nuestra lista.
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [1, 2, 3]
 >>> aux.__imul__(2) # aux *= 2
@@ -170,14 +179,15 @@ asigna a nuestra lista.
 [1, 2, 3, 1, 2, 3]
 ```
 
-### \_\_init\_\_
+## \_\_init\_\_
 ```python
 __init__(self, /, *args, **kwargs)
     Initialize self.  See help(type(self)) for accurate signature.
 ```
 Incializa nuestra lista, si este metodo se llama sin parametros, nuestra lista
 se vuelve vacia, en caso contrario la inicializa con el valor del parametro.
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [1, 2, 3]
 >>> aux.__init__()
@@ -188,14 +198,15 @@ se vuelve vacia, en caso contrario la inicializa con el valor del parametro.
 [4, 5, 6]
 ```
 
-### \_\_iter\_\_
+## \_\_iter\_\_
 ```python
 __iter__(self, /)
     Implement iter(self).
 ```
 Nos devuelve un **iteredor** nuestra lista, para ser usado por ejemplo en ciclos.
 Funciona igual que `iter(lista)`.
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [1, 2, 3, 4, 5, 6]
 >>> mi_iter = aux.__iter__() # mi_iter = iter(aux)
@@ -211,14 +222,15 @@ Funciona igual que `iter(lista)`.
 
 ```
 
-### \_\_le\_\_
+## \_\_le\_\_
 ```python
 __le__(self, value, /)
     Return self<=value.
 ```
 Nos permite comparar cuando una lista es **menor** o igual a otra usando el orden
 lexicográfico, funciona igual que `lista1 <= lista2`.
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [1, 2, 3]                                                               
 >>> aux2 = [1, 1, 2]
@@ -230,13 +242,14 @@ True
 True
 ```
 
-### \_\_len\_\_
+## \_\_len\_\_
 ```python
 __len__(self, /)
     Return len(self).
 ```
 Devuelve la cantidad de elementos de nuestra lista.
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [1, 2, 3]
 >>> aux.__len__()
@@ -246,7 +259,7 @@ Devuelve la cantidad de elementos de nuestra lista.
 6
 ```
 
-### \_\_lt\_\_
+## \_\_lt\_\_
 ```python
 __lt__(self, value, /)
     Return self<value.
@@ -254,7 +267,8 @@ __lt__(self, value, /)
 
 Nos permite comparar cuando una lista es **menor**  otra usando el orden
 lexicográfico, funciona igual que `lista1 < lista2`.
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [1, 2, 3]                                                               
 >>> aux2 = [1, 1, 2]
@@ -266,7 +280,7 @@ True
 False
 ```
 
-### \_\_mul\_\_
+## \_\_mul\_\_
 ```python
 __mul__(self, value, /)
     Return self*value.
@@ -274,21 +288,23 @@ __mul__(self, value, /)
 Implementa la multiplicación `*` de una lista por un numero, es decir,
 repite la lista *value* veces. A diferencia de `__imul__` no modifica la lista,
 en su lugar devuelve la repetición de esta.
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [1, 2]
 >>> aux.__mul__(5) # aux * 5
 [1, 2, 1, 2, 1, 2, 1, 2, 1, 2]
 ```
 
-### \_\_ne\_\_
+## \_\_ne\_\_
 ```python
 __ne__(self, value, /)
     Return self!=value.
 ```
 Indica cuando dos listas son distintas, es decir, tienen al menos un elemento,
 distinto en el mismo indice. Funciona igual que `!=`.
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [1, 2, 3]
 >>> aux2 = [1, 2, 4]
@@ -298,27 +314,29 @@ True
 False
 ```
 
-### \_\_repr\_\_
+## \_\_repr\_\_
 ```python
 __repr__(self, /)
     Return repr(self).
 ```
 Representa a nuestra lista como un cadena. funciona igual que `repr()`.
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [1, 2, 3]
 >>> aux.__repr__() # repr(aux)
 '[1, 2, 3]'
 ```
 
-### \_\_reversed\_\_
+## \_\_reversed\_\_
 ```python
 __reversed__(self, /)
     Return a reverse iterator over the list.
 ```
 Devuelve un **iterador** en sentido opuesto de nuestra lista.
 Funciona igual que `reversed`.
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [1, 2, 3, 4, 5, 6]
 >>> mi_iter = aux.__reversed__() # mi_iter = iter(aux)
@@ -333,28 +351,30 @@ Funciona igual que `reversed`.
 1
 ```
 
-### \_\_rmul\_\_
+## \_\_rmul\_\_
 ```python
 __rmul__(self, value, /)
     Return value*self.
 ```
 Implementa la multiplicación derecha, esto sucede, cuando el el primer multiplicando
 no puede multiplicarse por una lista, en esta caso se invoca `__rmul__` en vez de `__mul__`.
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [1, 2, 3]
 >>> aux.__rmul__(3) # 3 * aux 
 [1, 2 ,3, 1, 2, 3, 1, 2, 3]
 ```
 
-### \_\_setitem\_\_
+## \_\_setitem\_\_
 ```python
 __setitem__(self, key, value, /)
     Set self[key] to value.
 ```
 Nos permite modificar el valor del elmento con indice *key* y asignarle el valor *value*.
 Es igual que `lista[key] = value`
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [1, 2, 3]
 >>> aux.__setitem__(2,10) # aux[2] = 10
@@ -362,28 +382,30 @@ Es igual que `lista[key] = value`
 [1, 2, 10]
 ```
 
-### \_\_sizeof\_\_
+## \_\_sizeof\_\_
 
 ```python
 __sizeof__(self, /)
     Return the size of the list in memory, in bytes.
 ```
 Devuele el numero de bytes que nuestra lista ocupa en memoria.
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [1, 2, 3]
 >>> aux.__sizeof__();
 104
 ```
 
-### append
+## append
 
 ```python
 append(self, object, /)
     Append object to the end of the list.
 ```
 Agregar el *object* al final de la lista.
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [1, 2, 3]
 >>> aux.append(2)
@@ -393,14 +415,15 @@ Agregar el *object* al final de la lista.
 [1, 2, 3, 2, [1, 2]]
 ```
 
-### clear
+## clear
 
 ```python
 clear(self, /)
     Remove all items from list.
 ```
 Elimina todos los elementos de la lista, dejando una lista vacia.
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [1, 2, 3]
 >>> aux.clear()
@@ -409,7 +432,7 @@ Elimina todos los elementos de la lista, dejando una lista vacia.
 
 ```
 
-### copy
+## copy
 
 ```python
 copy(self, /)
@@ -417,7 +440,8 @@ copy(self, /)
 ```
 Crea una copia *shallow* de nuestra lista, esto es, crea una nueva lista e inserta
 **referencias** a los elementos de la lista original.
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [1, 2 ,3]
 >>> copia = aux.copy()
@@ -425,14 +449,15 @@ Crea una copia *shallow* de nuestra lista, esto es, crea una nueva lista e inser
 [1, 2, 3]
 ```
 
-### count
+## count
 
 ```python
 count(self, value, /)
     Return number of occurrences of value.
 ```
 Cuenta el numero de ocurrencias de *value* en nuestra lista
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [1, 2, 3, 1, 2, 1, 1]
 >>> aux.count(1)
@@ -440,14 +465,15 @@ Cuenta el numero de ocurrencias de *value* en nuestra lista
 
 ```
 
-### extend
+## extend
 
 ```python
 extend(self, iterable, /)
     Extend list by appending elements from the iterable.
 ```
 Concatena un *iterable* al final de la lista.
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux=[1, 2, 3]
 >>> aux.extend([1,2,[3,4]])
@@ -455,7 +481,7 @@ Concatena un *iterable* al final de la lista.
 [1, 2, 3, 1, 2, [3, 4]]
 ```
 
-### index
+## index
 
 ```python
 index(self, value, start=0, stop=9223372036854775807, /)
@@ -465,7 +491,8 @@ index(self, value, start=0, stop=9223372036854775807, /)
 ```
 Indica el el indice de la primera ocurrencia de *value*, en la lista entre
 los indices *start* y *end*
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [1, 2, 3, 2, 5]
 >>> aux.index(2)
@@ -474,14 +501,15 @@ los indices *start* y *end*
 3
 ```
 
-### insert
+## insert
 
 ```python
 insert(self, index, object, /)
     Insert object before index.
 ```
 Inserta un objeto en la lista antes de la posición *index*.
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [1, 2, 3]
 >>> aux.insert(1,4)
@@ -493,7 +521,7 @@ Inserta un objeto en la lista antes de la posición *index*.
 
 ```
 
-### pop
+## pop
 
 ```python
 pop(self, index=-1, /)
@@ -503,7 +531,8 @@ pop(self, index=-1, /)
 ```
 Elimina y devuelve el elemento en el indice *index*, en caso de no especificar un indice
 elimina y devuelve el ultimo elemento.
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [1 , 2, 3, [4,5]]
 >>> aux.pop()
@@ -516,7 +545,7 @@ elimina y devuelve el ultimo elemento.
 [2, 3]
 ```
 
-### remove
+## remove
 
 ```python
 remove(self, value, /)
@@ -525,7 +554,8 @@ remove(self, value, /)
     Raises ValueError if the value is not present.
 ```
 Elimina la primera ocurrencia de *value* en la lista
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [1, 2, 1, 2, 1]
 >>> aux.remove(2)
@@ -533,14 +563,15 @@ Elimina la primera ocurrencia de *value* en la lista
 [1, 1, 2, 1]
 ```
 
-### reverse
+## reverse
 
 ```python
 reverse(self, /)
     Reverse *IN PLACE*.
 ```
 Invierte el orden de la lista.
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [1, 2, 3]
 >>> axu.reverse()
@@ -548,7 +579,7 @@ Invierte el orden de la lista.
 [3, 2, 1]
 ```
 
-### sort
+## sort
 
 ```python
 sort(self, /, *, key=None, reverse=False)
@@ -565,7 +596,8 @@ sort(self, /, *, key=None, reverse=False)
 
 Ordena la lista, se puede especifcar si el orden es acentende o descendente usando
 el parametro *reverse*, asi como ordener con algún criterio *key*.
-#### Ejemplo
+
+**Ejemplo**
 ```python
 >>> aux = [5, 7, 2, 3]
 >>> aux.sort()
