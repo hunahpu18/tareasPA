@@ -138,4 +138,27 @@ cada elemento que se condisere falso, por ejemplo, `0`, `""`, `False`, `{}` o `[
 
 ## Reduce
 
+Aplica una función de dos parametros de forma acumulada a los elementos de un *iterable* de izquierda a derecha hasta obtener un solo valor, por ejemplo para
+obtener la suma de los elementos de una lista
 
+```python
+>>> from functools import reduce
+>>> lista = [1, 2, 4, 9]
+>>> res = reduce(lambda x,y: x+y, lista)
+>>> res
+16
+```
+
+al igual que las funciones descritas anteriormente se pueden utilzar funciones de tipo
+lambda y definidas por el usuario, por ejemplo, para obtener el maximo de una lista,
+
+```python
+>>> from functools import reduce
+
+>>> # Minimum
+>>> def my_min_func(a, b):
+...     return a if a < b else b
+>>> lista = [10, 21, 3, 12, 1]
+>>> reduce(my_min_func, numbers)
+1
+```
