@@ -21,9 +21,10 @@ class FahrenheitError(Exception):
     
 
 def fToc(f):
-    if f < FahrenheitError.min_f or FahrenheitError.max_f<f:
+    if f < FahrenheitError.min_f or FahrenheitError.max_f < f:
         raise FahrenheitError(f)
     return (f - 32) * 5 / 9
+
 
 if __name__ == '__main__':
     fahrenheit = input('Ingrese la temperatura en grados Fahrenheit ')
@@ -34,7 +35,7 @@ if __name__ == '__main__':
     else:
         try:
             celcius = fToc(fahrenheit)
-        except  FahrenheitError as ex:
+        except FahrenheitError as ex:
             print(ex)
         else:
             print(f'la temperatura en celcius es: {celcius: .1f}')
