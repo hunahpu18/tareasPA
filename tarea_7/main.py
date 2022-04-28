@@ -11,9 +11,9 @@ dieh = {('e', 'e'): 'e', ('e', 'a'): 'a', ('e', 'b'): 'b', ('e', 'c'): 'c', ('e'
 
 test = mult_table(6)
 g = Group(dieh)
-g1 = Group(dieh)
-print(f'El grupo tiene orden: {g.order()}')
+print(f'El grupo tiene orden: {len(g)}')
+print(f'El grupo tiene unidad: {g.unit}')
 print(f'El grupo es conmutativo {g.is_commutative()}')
 print(f'La operación de c - a es {g["c"] + g["a"]}')
-print(f'La operación de c - a es {g["c"] + g1["a"]}')
+print(f'el orden de a es {g["a"].order()}')
 print(f'{g}')

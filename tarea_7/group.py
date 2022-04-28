@@ -78,7 +78,7 @@ class Group:
 
     def _has_inverses(self, table: dict) -> bool:
         for elto in self.elements:
-            row = [r for r in table.keys() if r[0] == elto]
+            row = [r for r in table if r[0] == elto]
             row_values = [r[1] for r in row if table[r] == self.unit]
             if len(row_values) == 1:
                 #print(f'{elto} tiene inverso')
@@ -110,7 +110,7 @@ class Group:
         return '\n'.join(' '.join(map(str, row)) for row in res)
 
     def is_commutative(self) -> bool:
-        for i, j in self.table.keys():
+        for i, j in self.table:
             if self.table[(i, j)] != self.table[(j, i)]:
                 return False
         return True
@@ -161,4 +161,12 @@ def mult_table(n: int) -> dict:
     for x in elements:
         for y in elements:
             res[(x, y)] = (x + y) % n
+    return res
+
+def mult_cyclic(n: int) -> dict:
+    elements = [x for x in range(0, n) if math.gcd(x, n) == 1]
+    res = dict()
+    for x in elements:
+        for y in elements:
+            res[(x, y)] = (x * y) % n
     return res
