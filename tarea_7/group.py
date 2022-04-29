@@ -5,6 +5,8 @@ CDMX 27th april 2022
 Representación de un grupo finito dada su tabla de multiplicación(Cayley)
 """
 
+from math import gcd
+from itertools import combinations, chain, product
 
 class Group:
     """
@@ -26,12 +28,11 @@ class Group:
     def __init__(self, table: dict):
         """
         Construye la representación de un grupo a partir de su tabla de multiplicar
-                :param table: dict
-                    tabla de multiplicar
-                """
+        :param table: dict
+            tabla de multiplicar
+        """
         self.elements = list(set(table.values()))
         self.inverses = dict()
-        #print(f'{table =}')
         if self._has_unity(table) and self._has_inverses(table) and self._is_associative(table):
             self.table = table
 
@@ -39,6 +40,14 @@ class Group:
             raise Exception("La tabla de multiplicación no es de un grupo")
 
     def _is_associative(self, table: dict) -> bool:
+        """
+        Verfica si el grupo satisface la propiedad asociativa, es decir,
+        (i+j)+k = i+(j+k)
+        :param table:std
+            tabla de multiplicación
+        :return:
+            True si se satisface la propiedad asociativa, False en otro caso
+        """
         """"for i in self.elements:
             for j in self.elements:
                 for k in self.elements:
@@ -52,9 +61,11 @@ class Group:
 
     def _has_unity(self, table: dict) -> bool:
         """
-
-        :param table:
+        Verfica si el grupo tiene unidad
+        :param table:dict
+            tabla de multiplicar
         :return:
+            True si el grupo tiene unidad, False en otro caso
         """
         n_of_units = 0
         unit = None
@@ -67,26 +78,27 @@ class Group:
             if is_unity:
                 n_of_units += 1
                 unit = i
-                print(f'{i} es unidad')
         if n_of_units == 1:
-            print('unidad: yes')
             self.unit = unit
             return True
         else:
-            print('unidad: no')
             return False
 
     def _has_inverses(self, table: dict) -> bool:
+        """
+        Verifica si el grupo tiene inversos
+        :param table: dict
+            Tabla de multiplicar
+        :return:
+            True si existen todos los inversos, False en otro caso
+        """
         for elto in self.elements:
             row = [r for r in table if r[0] == elto]
             row_values = [r[1] for r in row if table[r] == self.unit]
             if len(row_values) == 1:
-                #print(f'{elto} tiene inverso')
                 self.inverses[elto] = row_values[0]
             else:
-                print(f'{elto} inv: no')
                 return False
-        print('inv: yes')
         return True
 
     def __repr__(self):
@@ -110,6 +122,11 @@ class Group:
         return '\n'.join(' '.join(map(str, row)) for row in res)
 
     def is_commutative(self) -> bool:
+        """
+        Verifica si un grupo es conmutativo
+        :return:
+            True si el grupo es conmutativo, False en otro caso
+        """
         for i, j in self.table:
             if self.table[(i, j)] != self.table[(j, i)]:
                 return False
@@ -121,6 +138,17 @@ class Group:
     def __getitem__(self, key):
         if key in self.elements:
             return GroupElement(key, self)
+
+    def subgroups_list(self):
+        sets_to_try = (chain(*[list(combinations(self.elements, n))for n, _ in enumerate(self.elements)]))
+        sets_with_unity = (filter(lambda x: self.unit in x and len(self.elements) % len(x) == 0, sets_to_try))
+        sets_with_inverses = (filter(lambda x: all([self.inverses[elto] in x for elto in x]), sets_with_unity))
+        sets_closed = list([g for g in sets_with_inverses if all([self.table[(x,y)] in g for x, y in product(g, g)])])
+        return sets_closed+[tuple(self.elements)]
+
+    def normal_subgroups_list(self):
+        candidates = self.subgroups()
+        return [sg for sg in candidates if all({all({(self[x] + self[i] - self[x]).id in sg for x in self.elements}) for i in sg})]
 
 
 class GroupElement:
@@ -148,6 +176,11 @@ class GroupElement:
         return GroupElement(self.group.inverses[self.id], self.group)
 
     def order(self) -> int:
+        """
+        Devuelve el orden de un elemento
+        :return:
+            El orden de un elemento
+        """
         aux = self.id
         for i in range(1, 1+len(self.group.elements)):
             aux = self.group.table[(self.id, aux)]
@@ -156,6 +189,13 @@ class GroupElement:
 
 
 def mult_table(n: int) -> dict:
+    """
+    Crea la tabla de multiplicar de el grupo (Z/nZ, +)
+    :param n: int
+        Tamaño del grupo a crear
+    :return:
+        Diccionario con la tabla de multiplicar del grupo (Z/nZ, +)
+    """
     elements = range(0, n)
     res = dict()
     for x in elements:
@@ -163,8 +203,16 @@ def mult_table(n: int) -> dict:
             res[(x, y)] = (x + y) % n
     return res
 
+
 def mult_cyclic(n: int) -> dict:
-    elements = [x for x in range(0, n) if math.gcd(x, n) == 1]
+    """
+        Crea la tabla de multiplicar de el grupo (Z/nZ, *)
+        :param n: int
+            Entero con el cual se creara el grupo mod n
+        :return:
+            Diccionario con la tabla de multiplicar del grupo (Z/nZ, *)
+        """
+    elements = [x for x in range(0, n) if gcd(x, n) == 1]
     res = dict()
     for x in elements:
         for y in elements:
