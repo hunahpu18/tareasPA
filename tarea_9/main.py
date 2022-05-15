@@ -230,7 +230,7 @@ def collect_commission_adjustment(data) -> dict:
 
 """
 
-Ejercicio 8
+Ejercicio 9
 ---------------------------
 
 """
@@ -251,7 +251,16 @@ Parameters
     --------
         float
         The associated tag value.
+
+
+    Examples
+    --------
+    >>> banxico_value('YHOO','YHOO-12.32USD')
+    -12.32
+    >>> banxico_value('YHOO','YHOO-12x32USD')
+    -12.32
     """
+
     float_nt = "[^0-9-]*([-]*[0-9]+.[0-9]+)[^0-9]"
     try:
         res = float(re.search(tag + float_nt, data).group(1))
@@ -260,13 +269,28 @@ Parameters
     return res
 
 
-def exercise_10(dat_df):
+"""
 
+Ejercicio 10
+---------------------------
+
+"""
+
+
+def exercise_10(dat_df):
+    """
+    returns columns in data_df that begin with imf followed by at least one digit, regardless of upper or lower case
+    :param dat_df:
+    :return:
+    """
+    # se puede omitir el 'else None' pues en caso de no encontrar el patron de busqueda re.match devuelve None
     col_sel = list(
             map(
                 lambda s: s if re.match("[Ii][Mm][Ff][0-9]+", s) else None,
                 dat_df.columns,
             ))
+    # se puede omitir el ' is not None' puesto que cualquier objeto en python distinto de None es evaluado como True
+    # o usar list(filter(None,col_sel))
     col_sel = [c for c in col_sel if c is not None]
 
     return col_sel
@@ -278,4 +302,5 @@ if __name__ == '__main__':
     print(f'{from_standard_equity_option_convention("YHOO150416C00030000") = }')
     print(f'Validate Account')
     validate_account("DU3141592")
-    print(f'{banxico_value("YHOO","YHOO1.2n") = }')
+    print(f'{banxico_value("YHOO","YHOO-12.32USD") = }')
+    print(f'{banxico_value("YHOO","YHOO12x32USD") = }')
