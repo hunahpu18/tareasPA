@@ -5,6 +5,8 @@ CDMX
 
 import re
 import numpy as np
+
+
 """
 
 Ejercicio 1
@@ -14,6 +16,15 @@ Ejercicio 1
 
 
 def get_filename(path: str) -> str:
+    """
+    get the filename with extension of a given path
+    :param
+        path: str
+         path from which the filename will be extracted
+    :return:
+        filename: str
+            file for the given path
+    """
     return re.search(r"\w+\.+\w+$", path).group(0)
 
 
@@ -26,11 +37,20 @@ Ejercicio 2
 
 
 def translate_date(month) -> str:
+    """
+    Translate dates from English to Spanish
+    :param
+        month:
+            name of the month to be translated
+    :return:
+        month: str
+            name of the month translated to spanish
+    """
     month = month.group(0).lower()
-    months = {'jan': 'ene', 'feb': 'feb', 'mar': 'mar',
-              'apr': 'abr', 'may': 'may', 'jun': 'jun',
-              'jul': 'jul', 'aug': 'ago', 'sep': 'sep',
-              'oct': 'oct', 'nov': 'nov', 'dic': 'dic'}
+    months = {'jan': 'Ene', 'feb': 'Feb', 'mar': 'Mar',
+              'apr': 'Abr', 'may': 'May', 'jun': 'Jun',
+              'jul': 'Jul', 'aug': 'Ago', 'sep': 'Sep',
+              'oct': 'Oct', 'nov': 'Nov', 'dec': 'Dic'}
     return months[month]
 
 
@@ -53,9 +73,9 @@ def date_in_spanish(date: str) -> str:
        Examples
        --------
        >>> date_in_spanish("23-Apr-2021")
-       23-Abr-2021
+       '23-Abr-2021'
        >>> date_in_spanish("Dec-24-2020")
-       Dic-24-2020
+       'Dic-24-2020'
        """
     return re.sub(r"\w{3}", translate_date, date, count=1)
 
@@ -92,7 +112,6 @@ def from_standard_equity_option_convention(code: str) -> dict:
     {'symbol': 'YHOO', 'expire': '20150416', 'right': 'C', 'strike': 30.0}
     """
     aux = re.search(r"([A-Za-z]{1,6})(\d{6})([CP])(\d{8})", code)
-    print(aux)
     res = {'symbol': aux.group(1), 'expire': '20'+aux.group(2),
            'right': aux.group(3), 'strike': float(aux.group(4)[:5] + '.' + aux.group(4)[5:])}
     return res
@@ -173,12 +192,21 @@ Ejercicio 7
 
 
 def exercise_7(text: str):
+    """
+    Solution to exercise 7 of hw
+    :param
+        text: str
+            text to be validated
+    :return:
+        error_message:
+    """
     if re.match(r"^\d(,\d)*$", text) is None:
         error_message = \
             "Try again, your answer does not correspond to a comma " + \
             "separated integers list. Type something like '1, 2, 3' " + \
             "without the apostrophes."
         return error_message
+    return None
 
 
 """
@@ -225,7 +253,6 @@ def collect_commission_adjustment(data) -> dict:
     {'end_date': '20210219', 'symbol': 'ALB', 'sectype': 'STK', \
 'amount': -0.4097}
     """
-    pass
 
 
 """
@@ -257,8 +284,8 @@ Parameters
     --------
     >>> banxico_value('YHOO','YHOO-12.32USD')
     -12.32
-    >>> banxico_value('YHOO','YHOO-12x32USD')
-    -12.32
+    >>> banxico_value('YHOO','YHOO15.32USD')
+    15.32
     """
 
     float_nt = "[^0-9-]*([-]*[0-9]+.[0-9]+)[^0-9]"
@@ -279,17 +306,22 @@ Ejercicio 10
 
 def exercise_10(dat_df):
     """
-    returns columns in data_df that begin with imf followed by at least one digit, regardless of upper or lower case
-    :param dat_df:
+    returns columns in data_df that begin with imf followed by at least one digit,
+    regardless of upper or lower case
+    :param
+        dat_df: dateframe to be filtered
     :return:
+        col_sel: columns that have passed the filter
     """
-    # se puede omitir el 'else None' pues en caso de no encontrar el patron de busqueda re.match devuelve None
+    # se puede omitir el 'else None' pues en caso de no encontrar el patron de
+    # busqueda re.match devuelve None
     col_sel = list(
             map(
                 lambda s: s if re.match("[Ii][Mm][Ff][0-9]+", s) else None,
                 dat_df.columns,
             ))
-    # se puede omitir el ' is not None' puesto que cualquier objeto en python distinto de None es evaluado como True
+    # se puede omitir el ' is not None' puesto que cualquier objeto en python
+    # distinto de None es evaluado como True
     # o usar list(filter(None,col_sel))
     col_sel = [c for c in col_sel if c is not None]
 
@@ -298,9 +330,9 @@ def exercise_10(dat_df):
 
 if __name__ == '__main__':
     print(f'{get_filename("$HOME/proyecto1/modulo5/programa3.py") = }')
-    print(f'{date_in_spanish("23-Apr-2021") = }')
+    print(f'{date_in_spanish("Dec-24-2020") = }')
     print(f'{from_standard_equity_option_convention("YHOO150416C00030000") = }')
-    print(f'Validate Account')
+    print('Validate Account')
     validate_account("DU3141592")
     print(f'{banxico_value("YHOO","YHOO-12.32USD") = }')
-    print(f'{banxico_value("YHOO","YHOO12x32USD") = }')
+    print(f'{banxico_value("YHOO","YHOO12.32USD") = }')

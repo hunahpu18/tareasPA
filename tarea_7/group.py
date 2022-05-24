@@ -30,7 +30,7 @@ class Group:
             tabla de multiplicar
         """
         self.elements = list(set(table.values()))
-        self.inverses = dict()
+        self.inverses = {}
         if check:
             self.table = table
             self._has_unity(table)
@@ -85,10 +85,10 @@ class Group:
             self.unit = unit
             print('True')
             return True
-        else:
-            self.unit = None
-            print('False')
-            return False
+
+        self.unit = None
+        print('False')
+        return False
 
     def _has_inverses(self, table: dict) -> bool:
         """
@@ -123,8 +123,8 @@ class Group:
         if all([elto in self.elements for elto in elements]):
             if not self._is_subgroup(elements):
                 raise Exception('Los elementos no forma un subgrupo')
-            else:
-                return Group({key: self.table[key] for key in product(elements, elements)}, check=1)
+            return Group({key: self.table[key] for key in product(elements, elements)}, check=1)
+        return None
 
     def _is_subgroup(self, elements: tuple) -> bool:
         if self.unit not in elements or len(self.elements) % len(elements) != 0:
@@ -158,21 +158,22 @@ class Group:
     def __getitem__(self, key):
         if key in self.elements:
             return GroupElement(key, self)
+        return None
 
     def __repr__(self):
-        res = list()
+        res = []
         for x in self.elements:
-            aux = list()
+            aux = []
             for y in self.elements:
                 aux.append(self.table[(x, y)])
             res.append(aux)
         return str(res)
 
     def __str__(self):
-        res = list()
+        res = []
         res.append([0] + self.elements)
         for x in self.elements:
-            aux = list()
+            aux = []
             aux.append(x)
             for y in self.elements:
                 aux.append(self.table[(x, y)])
@@ -183,7 +184,7 @@ class Group:
         return self.table == other.table
 
     def __mul__(self, other):
-        table = dict()
+        table = {}
         for x, y in product(self.table, other.table):
             x1, x2 = x
             y1, y2 = y
@@ -217,7 +218,7 @@ class GroupElement:
 
     def __rmul__(self, other: int):
         aux = self
-        for i in range(1, other):
+        for _ in range(1, other):
             aux = aux + self
         return aux
 
@@ -232,6 +233,7 @@ class GroupElement:
             aux = self.group.table[(self.id, aux)]
             if aux == self.group.unit:
                 return i+1
+        return 0
 
 
 def mult_cyclic(n: int) -> dict:
@@ -243,7 +245,7 @@ def mult_cyclic(n: int) -> dict:
         Diccionario con la tabla de multiplicar del grupo (Z/nZ, +)
     """
     elements = range(0, n)
-    res = dict()
+    res = {}
     for x in elements:
         for y in elements:
             res[(x, y)] = (x + y) % n
@@ -259,7 +261,7 @@ def mult_units(n: int) -> dict:
             Diccionario con la tabla de multiplicar del grupo (Z/nZ, *)
         """
     elements = [x for x in range(0, n) if gcd(x, n) == 1]
-    res = dict()
+    res = {}
     for x in elements:
         for y in elements:
             res[(x, y)] = (x * y) % n
