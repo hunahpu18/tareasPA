@@ -57,7 +57,7 @@ def job():
                 writer.writerow([key, data[key], dt_string])
 
 
-schedule.every(2).minutes.do(job)
+schedule.every().hour.do(job)
 while True:
     schedule.run_pending()
     time.sleep(1)
