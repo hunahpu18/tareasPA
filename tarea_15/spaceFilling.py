@@ -1,67 +1,85 @@
 import matplotlib.pyplot as plt
+from matplotlib.pyplot import figure
 
 
-def hilberto(x, y, n, dx, dy):
+def hilberto(n, x, y, dx, dy):
     if n == 1:
-        print(f"{x}, {y}")
         px.append(x)
         py.append(y)
     else:
         n = n // 2
         lg = n
-        hilberto(x + dx * lg, y + dx * lg, n, dx, 1 - dy)
-        hilberto(x + dy * lg, y + (1 - dy) * lg, n, dx, dy)
-        hilberto(x + (1 - dx) * lg, y + (1 - dx) * lg, n, dx, dy)
-        hilberto(x + (1 - dy) * lg, y + dy * lg, n, 1 - dx, dy)
+        hilberto(n, x + dx * lg, y + dx * lg, dx, 1 - dy)
+        hilberto(n, x + dy * lg, y + (1 - dy) * lg, dx, dy)
+        hilberto(n, x + (1 - dx) * lg, y + (1 - dx) * lg, dx, dy)
+        hilberto(n, x + (1 - dy) * lg, y + dy * lg, 1 - dx, dy)
 
 
-def hilbert3D(s, x, y, z, dx, dy, dz, dx2, dy2, dz2, dx3, dy3, dz3):
-    if s == 1:
+def hilberto3D(n, x, y, z, dx, dy, dz, dx2, dy2, dz2, dx3, dy3, dz3):
+    if n == 1:
         px.append(x)
         py.append(y)
         pz.append(z)
     else:
-        s /= 2
+        n /= 2
         if dx < 0:
-            x -= s * dx
+            x -= n * dx
         if dy < 0:
-            y -= s * dy
+            y -= n * dy
         if dz < 0:
-            z -= s * dz
+            z -= n * dz
         if dx2 < 0:
-            x -= s * dx2
+            x -= n * dx2
         if dy2 < 0:
-            y -= s * dy2
+            y -= n * dy2
         if dz2 < 0:
-            z -= s * dz2
+            z -= n * dz2
         if dx3 < 0:
-            x -= s * dx3
+            x -= n * dx3
         if dy3 < 0:
-            y -= s * dy3
+            y -= n * dy3
         if dz3 < 0:
-            z -= s * dz3
-        hilbert3D(s, x, y, z, dx2, dy2, dz2, dx3, dy3, dz3, dx, dy, dz)
-        hilbert3D(s, x + s * dx, y + s * dy, z + s * dz, dx3, dy3, dz3, dx, dy, dz, dx2, dy2, dz2)
-        hilbert3D(s, x + s * dx + s * dx2, y + s * dy + s * dy2, z + s * dz + s * dz2, dx3, dy3, dz3, dx, dy, dz, dx2,
-                  dy2, dz2)
-        hilbert3D(s, x + s * dx2, y + s * dy2, z + s * dz2, -dx, -dy, -dz, -dx2, -dy2, -dz2, dx3, dy3, dz3)
-        hilbert3D(s, x + s * dx2 + s * dx3, y + s * dy2 + s * dy3, z + s * dz2 + s * dz3, -dx, -dy, -dz, -dx2, -dy2,
-                  -dz2, dx3, dy3, dz3)
-        hilbert3D(s, x + s * dx + s * dx2 + s * dx3, y + s * dy + s * dy2 + s * dy3, z + s * dz + s * dz2 + s * dz3,
-                  -dx3, -dy3, -dz3, dx, dy, dz, -dx2, -dy2, -dz2)
-        hilbert3D(s, x + s * dx + s * dx3, y + s * dy + s * dy3, z + s * dz + s * dz3, -dx3, -dy3, -dz3, dx, dy, dz,
-                  -dx2, -dy2, -dz2)
-        hilbert3D(s, x + s * dx3, y + s * dy3, z + s * dz3, dx2, dy2, dz2, -dx3, -dy3, -dz3, -dx, -dy, -dz)
+            z -= n * dz3
+        hilberto3D(n, x, y, z, dx2, dy2, dz2, dx3, dy3, dz3, dx, dy, dz)
+        hilberto3D(n, x + n * dx, y + n * dy, z + n * dz, dx3, dy3, dz3, dx, dy, dz, dx2, dy2, dz2)
+        hilberto3D(n, x + n * dx + n * dx2, y + n * dy + n * dy2, z + n * dz + n * dz2, dx3, dy3, dz3, dx, dy, dz, dx2,
+                   dy2, dz2)
+        hilberto3D(n, x + n * dx2, y + n * dy2, z + n * dz2, -dx, -dy, -dz, -dx2, -dy2, -dz2, dx3, dy3, dz3)
+        hilberto3D(n, x + n * dx2 + n * dx3, y + n * dy2 + n * dy3, z + n * dz2 + n * dz3, -dx, -dy, -dz, -dx2, -dy2,
+                   -dz2, dx3, dy3, dz3)
+        hilberto3D(n, x + n * dx + n * dx2 + n * dx3, y + n * dy + n * dy2 + n * dy3, z + n * dz + n * dz2 + n * dz3,
+                   -dx3, -dy3, -dz3, dx, dy, dz, -dx2, -dy2, -dz2)
+        hilberto3D(n, x + n * dx + n * dx3, y + n * dy + n * dy3, z + n * dz + n * dz3, -dx3, -dy3, -dz3, dx, dy, dz,
+                   -dx2, -dy2, -dz2)
+        hilberto3D(n, x + n * dx3, y + n * dy3, z + n * dz3, dx2, dy2, dz2, -dx3, -dy3, -dz3, -dx, -dy, -dz)
 
 
-px = []
-py = []
-pz = []
-# hilberto(0, 0, math.pow(2, 4), 0, 0)
-hilbert3D(8, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-# plt.plot(px, py, 'o-')
-# plt.show()
-fig = plt.figure(figsize=(4, 4))
-ax = fig.add_subplot(111, projection='3d')
-ax.plot(px, py, pz)
-plt.show()
+def plotHilbert(n: int):
+    px.clear()
+    py.clear()
+    figure(figsize=(2*n,2*n),dpi=80)
+    hilberto(pow(2, n), 0, 0, 0, 0)
+    plt.plot(px, py, 'o-')
+    plt.axis('off')
+    #plt.tight_layout()
+    plt.show()
+
+
+def plotHilbert3D(n: int):
+    px.clear()
+    py.clear()
+    pz.clear()
+    hilberto3D(pow(2, n), 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+    fig = plt.figure(figsize=(4*n, 4*n))
+    ax = fig.add_subplot(111, projection='3d')
+    ax.plot(px, py, pz, "o-")
+    plt.axis("off")
+    plt.tight_layout()
+    plt.show()
+
+
+if __name__ == "__main__":
+    px = []
+    py = []
+    pz = []
+    plotHilbert(3)
